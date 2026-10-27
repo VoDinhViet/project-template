@@ -1,0 +1,32 @@
+# MariaDB cho môi trường dev local. Chạy từ thư mục `api/`: `pnpm db:up`.
+# Mật khẩu đọc từ `api/docker/.env` (đã gitignore, mẫu: `.env.example`).
+name: qlda
+services:
+  mariadb:
+    # LTS gần với bản MariaDB thường có trên shared hosting; đối chiếu lại khi biết phiên bản của hosting.
+    image: mariadb:10.11
+    container_name: qlda-mariadb
+    restart: unless-stopped
+    # Chỉ mở cho máy này, không mở ra mạng LAN.
+    ports:
+      - '127.0.0.1:3306:3306'
+    environment:
+      MARIADB_ROOT_PASSWORD: ${MARIADB_ROOT_PASSWORD:?}
+      MARIADB_DATABASE: quan_ly_du_an
+      MARIADB_USER: qlda
+      MARIADB_PASSWORD: ${QLDA_PASSWORD:?}
+      QLDA_RO_PASSWORD: ${QLDA_RO_PASSWORD:?}
+    command:
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
+    volumes:
+      - mariadb_data:/var/lib/mysql
+      - ./mariadb/init:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ['CMD', 'healthcheck.sh', '--connect', '--innodb_initialized']
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  mariadb_data:

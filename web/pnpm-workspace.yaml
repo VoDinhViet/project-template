@@ -1,0 +1,14 @@
+allowBuilds:
+  '@firebase/util': false
+  esbuild: true
+  lightningcss: true
+  protobufjs: false
+  unrs-resolver: false
+minimumReleaseAgeExclude:
+  - '@firebase/app-compat@0.5.20'
+  - '@firebase/app@0.16.4'
+  - '@firebase/auth-compat@0.6.13'
+  - '@firebase/auth@1.13.8'
+  - '@firebase/firestore-compat@0.4.16'
+  - '@firebase/firestore@4.19.0'
+  - firebase@13.1.0

@@ -1,0 +1,30 @@
+{
+  "mcpServers": {
+    "shadcn": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "shadcn@latest",
+        "mcp",
+        "--cwd",
+        "web"
+      ]
+    },
+    "context7": {
+      "type": "http",
+      "url": "https://mcp.context7.com/mcp"
+    },
+    "firebase": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "firebase-tools@15.34.1",
+        "mcp",
+        "--only",
+        "core,auth",
+        "--dir",
+        "."
+      ]
+    }
+  }
+}

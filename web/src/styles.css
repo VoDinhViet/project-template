@@ -1,0 +1,393 @@
+/* Neo gốc quét class vào chính thư mục này: build client và SSR của Start có thể chạy với CWD
+   khác nhau, khiến Tailwind sinh ra hai bộ CSS lệch nhau. */
+@import "tailwindcss" source(".");
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+@import "@fontsource-variable/nunito-sans";
+@import "@fontsource/ibm-plex-mono/400.css";
+@import "@fontsource/ibm-plex-mono/500.css";
+@import "@fontsource/ibm-plex-mono/600.css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --font-heading: var(--font-sans);
+  --font-sans: "Nunito Sans Variable", sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+  /* Cỡ nhỏ nhất cho nhãn viết hoa và số đếm; dưới 11px Nunito Sans khó đọc. */
+  --text-2xs: 0.6875rem;
+  --text-2xs--line-height: 1rem;
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-icon-green: var(--sidebar-icon-green);
+  --color-sidebar-icon-sky: var(--sidebar-icon-sky);
+  --color-sidebar-icon-orange: var(--sidebar-icon-orange);
+  --color-sidebar-icon-violet: var(--sidebar-icon-violet);
+  --color-sidebar-icon-pink: var(--sidebar-icon-pink);
+  --color-sidebar-icon-yellow: var(--sidebar-icon-yellow);
+  --color-sidebar-icon-teal: var(--sidebar-icon-teal);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --color-foreground: var(--foreground);
+  --color-background: var(--background);
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
+  --color-info: var(--info);
+  --color-info-foreground: var(--info-foreground);
+  --color-success-soft: var(--success-soft);
+  --color-success-ink: var(--success-ink);
+  --color-warning-soft: var(--warning-soft);
+  --color-warning-ink: var(--warning-ink);
+  --color-info-soft: var(--info-soft);
+  --color-info-ink: var(--info-ink);
+  --color-destructive-soft: var(--destructive-soft);
+  --color-destructive-ink: var(--destructive-ink);
+  --color-violet-soft: var(--violet-soft);
+  --color-violet-ink: var(--violet-ink);
+  --color-neutral-soft: var(--neutral-soft);
+  --color-neutral-ink: var(--neutral-ink);
+  --color-chart-6: var(--chart-6);
+  --color-chart-7: var(--chart-7);
+  --color-google-button: var(--google-button);
+  --color-google-button-border: var(--google-button-border);
+  --color-google-button-foreground: var(--google-button-foreground);
+  --shadow-card: var(--card-shadow);
+  --shadow-popover: var(--popover-shadow);
+  /* Hạ bóng mặc định của Tailwind cho popover/sheet/hover-card do shadcn sinh (không sửa tay `components/ui`). */
+  --shadow-md: 0 4px 12px rgba(16, 24, 40, 0.08);
+  --shadow-lg: 0 8px 24px rgba(16, 24, 40, 0.1);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+:root {
+  /* Bảng màu Jira (người dùng chọn 2026-10-24, thay indigo `#4f46e5`): chữ xanh đen `#172b4d`, chữ phụ
+     `#5e6c84` (5.4:1 trên nền gần trắng `#fafbfc`), màu chính xanh Jira `#0052cc` (chữ trắng 7:1). */
+  --background: #fafbfc;
+  --foreground: #172b4d;
+  --card: #ffffff;
+  --card-foreground: #172b4d;
+  --popover: #ffffff;
+  --popover-foreground: #172b4d;
+  --primary: #0052cc;
+  --primary-foreground: #ffffff;
+  --secondary: #ebecf0;
+  --secondary-foreground: #172b4d;
+  --muted: #f7f8f9;
+  --muted-foreground: #5e6c84;
+  --accent: #ebecf0;
+  --accent-foreground: #172b4d;
+  --destructive: #d92d55;
+  --destructive-foreground: #ffffff;
+  --border: #dfe1e6;
+  --input: #dfe1e6;
+  --ring: #4c9aff;
+  --chart-1: #0052cc;
+  --chart-2: #0acf97;
+  --chart-3: #ffbc00;
+  --chart-4: #39afd1;
+  --chart-5: #fa5c7c;
+  --chart-6: #fd7e14;
+  --chart-7: #6c757d;
+  --success: #12b76a;
+  --success-foreground: #053321;
+  --warning: #f79009;
+  --warning-foreground: #3d2400;
+  --info: #0ba5ec;
+  --info-foreground: #062f3b;
+  /* Cặp màu nhạt/đậm cho badge, trạng thái và icon mang nghĩa; ink đạt ≥ 4.5:1 trên cả nền soft lẫn
+     nền trắng. `.dark` định nghĩa lại cùng tên nên nơi dùng không cần tiền tố `dark:`. */
+  --success-soft: #dcfae6;
+  --success-ink: #067647;
+  --warning-soft: #feefc6;
+  --warning-ink: #b54708;
+  --info-soft: #e0f2fe;
+  --info-ink: #0369a1;
+  --destructive-soft: #ffe4e8;
+  --destructive-ink: #c01048;
+  --violet-soft: #e5e7ff;
+  --violet-ink: #4338ca;
+  --neutral-soft: #eaecf0;
+  --neutral-ink: #475467;
+  /* Card không viền, tách nền bằng bóng mềm của Hyper (người dùng chọn giữ như cũ, 2026-10-24). */
+  --card-shadow:
+    0 1px 2px rgba(154, 161, 171, 0.12), 0 0 35px rgba(154, 161, 171, 0.15);
+  /* Khung nổi (menu, select, dialog) không viền, tách nền bằng bóng nổi kiểu Atlassian (người dùng yêu cầu). */
+  --popover-shadow:
+    0 4px 8px -2px rgba(9, 30, 66, 0.12), 0 12px 24px -4px rgba(9, 30, 66, 0.14);
+  /* Người dùng muốn bo góc thật nhỏ: 4px cho card (`rounded-lg`), ~3px cho control (`rounded-md`). */
+  --radius: 0.25rem;
+  /* Màu nút đăng nhập Google lấy đúng hướng dẫn thương hiệu: bản "Neutral" (không viền) ở chế độ
+     sáng vì viền xám của bản "Light" quá gắt trên nền trắng; chế độ tối dùng bản "Dark". */
+  --google-button: #f2f2f2;
+  --google-button-border: #f2f2f2;
+  --google-button-foreground: #1f1f1f;
+  /* Sidebar giữ tông tối của Hyper theo yêu cầu người dùng (2026-10-24), chỉ ô logo đổi theo màu chính. */
+  --sidebar: #313a46;
+  --sidebar-foreground: #9ca8b8;
+  --sidebar-primary: #0052cc;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #3b4554;
+  --sidebar-accent-foreground: #ffffff;
+  --sidebar-border: rgba(255, 255, 255, 0.08);
+  --sidebar-ring: #4c9aff;
+  /* Mỗi mục menu một màu icon (người dùng chọn 2026-10-24). Sidebar tối ở cả hai chế độ nên không định nghĩa
+     lại trong `.dark`; không dùng `success`/`info`/`warning` vì bản tối của chúng gần nhau quá. */
+  --sidebar-icon-green: #12b76a;
+  --sidebar-icon-sky: #0ba5ec;
+  --sidebar-icon-orange: #f79009;
+  --sidebar-icon-violet: #a5a0ff;
+  --sidebar-icon-pink: #f472b6;
+  --sidebar-icon-yellow: #fbbf24;
+  --sidebar-icon-teal: #3fbf95;
+}
+
+.dark {
+  /*
+   * Tông "dim": nền xanh xám than thay vì xám bùn, chữ trắng ngà thay vì trắng sáng, màu nhấn hạ độ bão hoà
+   * để nhìn lâu không chói. Thẻ sáng hơn nền một bậc; sidebar cùng tông topbar để khung chữ L liền một khối,
+   * tách với nội dung bằng viền mảnh (tối hơn nền thì dải logo và topbar bị gãy màu ở chỗ nối).
+   */
+  --background: #1e232a;
+  --foreground: #d4dae2;
+  --card: #262c35;
+  --card-foreground: #d4dae2;
+  --popover: #2d343e;
+  --popover-foreground: #d4dae2;
+  /* Xanh Jira bản tối `#579dff`: đủ sáng làm chữ/link trên nền tối, nên nút nền xanh dùng chữ tối. */
+  --primary: #579dff;
+  --primary-foreground: #1d2125;
+  --secondary: #2f3640;
+  --secondary-foreground: #d4dae2;
+  --muted: #2f3640;
+  --muted-foreground: #a3adbb;
+  --accent: #2f3640;
+  --accent-foreground: #d4dae2;
+  --destructive: #e5677f;
+  --destructive-foreground: #2b0a12;
+  --border: #343c47;
+  --input: #3d4652;
+  --ring: #85b8ff;
+  /* Bộ màu biểu đồ đã chạy kiểm tra mù màu trên nền thẻ; biểu đồ luôn kèm chú giải có chữ. */
+  --chart-1: #579dff;
+  --chart-2: #3aa985;
+  --chart-3: #e0b54d;
+  --chart-4: #3a8fb3;
+  --chart-5: #e2738a;
+  --chart-6: #e38b4a;
+  --chart-7: #57616d;
+  --success: #3fbf95;
+  --success-foreground: #06261c;
+  --warning: #e0b54d;
+  --warning-foreground: #2e2100;
+  --info: #4fa9c9;
+  --info-foreground: #062530;
+  --success-soft: #1f3a35;
+  --success-ink: #8fdcbf;
+  --warning-soft: #3d3423;
+  --warning-ink: #ecc97a;
+  --info-soft: #1f3744;
+  --info-ink: #9ccfe3;
+  --destructive-soft: #43262f;
+  --destructive-ink: #f0a4b3;
+  --violet-soft: #31345c;
+  --violet-ink: #c5c8fa;
+  --neutral-soft: #323a45;
+  --neutral-ink: #c4ccd6;
+  --card-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  --popover-shadow:
+    0 4px 8px -2px rgba(0, 0, 0, 0.4), 0 12px 24px -4px rgba(0, 0, 0, 0.45);
+  --google-button: #131314;
+  --google-button-border: #8e918f;
+  --google-button-foreground: #e3e3e3;
+  --sidebar: #262c35;
+  --sidebar-foreground: #8f9bab;
+  --sidebar-primary: #0c66e4;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #2f3640;
+  --sidebar-accent-foreground: #e6ebf1;
+  --sidebar-border: #343c47;
+  --sidebar-ring: #85b8ff;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+  /* Nunito Sans ở 400 nét mảnh, nhìn nhạt trên nền sáng; 450 đậm vừa đủ mà vẫn tách bậc với 500/600. */
+  html {
+    @apply font-sans;
+    font-weight: 450;
+  }
+  /* Số liệu dùng chữ số đều của Nunito Sans (`tabular-nums`) như Hyper; mono chỉ dành cho mã và link. */
+  .font-mono {
+    font-family: var(--font-mono);
+  }
+  html {
+    caret-color: var(--primary);
+    accent-color: var(--primary);
+    scrollbar-color: color-mix(in oklab, var(--muted-foreground) 45%, transparent)
+      transparent;
+  }
+  ::selection {
+    background: color-mix(in oklab, var(--primary) 28%, transparent);
+  }
+}
+
+/*
+ * Soạn thảo (Tiptap) và hiển thị chỉ-đọc dùng chung một bộ kiểu: ProseMirror dựng thẻ HTML trần nên không gắn
+ * được class cho từng phần tử, và `RichTextContent` dựng cùng cấu trúc để hai bên nhìn giống nhau.
+ */
+@layer components {
+  .rich-text {
+    @apply text-sm leading-relaxed break-words;
+  }
+  .rich-text:focus {
+    outline: none;
+  }
+  .rich-text > * + * {
+    margin-top: 0.5rem;
+  }
+  .rich-text h2 {
+    @apply text-base font-semibold;
+  }
+  .rich-text h3 {
+    @apply text-sm font-semibold;
+  }
+  .rich-text ul {
+    list-style: disc;
+    padding-left: 1.25rem;
+  }
+  .rich-text ol {
+    list-style: decimal;
+    padding-left: 1.25rem;
+  }
+  .rich-text li + li {
+    margin-top: 0.25rem;
+  }
+  .rich-text li > p {
+    margin: 0;
+  }
+  .rich-text ul[data-type="taskList"] {
+    list-style: none;
+    padding-left: 0;
+  }
+  .rich-text ul[data-type="taskList"] > li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+  .rich-text ul[data-type="taskList"] > li > label {
+    margin-top: 0.2rem;
+    flex-shrink: 0;
+  }
+  .rich-text ul[data-type="taskList"] > li[data-checked="true"] > div {
+    text-decoration: line-through;
+    color: var(--muted-foreground);
+  }
+  .rich-text blockquote {
+    border-left: 3px solid var(--border);
+    padding-left: 0.75rem;
+    color: var(--muted-foreground);
+  }
+  .rich-text code {
+    background: var(--muted);
+    border-radius: 4px;
+    padding: 0.1rem 0.3rem;
+    font-family: var(--font-mono);
+    font-size: 0.85em;
+  }
+  .rich-text pre {
+    background: var(--muted);
+    border-radius: var(--radius-md);
+    padding: 0.625rem 0.75rem;
+    overflow-x: auto;
+  }
+  .rich-text pre code {
+    background: none;
+    padding: 0;
+  }
+  .rich-text a {
+    color: var(--primary);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+  .rich-text hr {
+    border-color: var(--border);
+  }
+  .rich-text p.is-editor-empty:first-child::before {
+    content: attr(data-placeholder);
+    float: left;
+    height: 0;
+    color: var(--muted-foreground);
+    opacity: 0.7;
+    pointer-events: none;
+  }
+}
+
+/* Sơ đồ workflow (React Flow) lấy màu từ token nên tự đổi theo `.dark`, không cần `colorMode`. */
+.react-flow {
+  --xy-background-color: var(--muted);
+  --xy-background-pattern-dots-color: var(--border);
+  --xy-edge-stroke: var(--muted-foreground);
+  --xy-edge-stroke-selected: var(--primary);
+  --xy-edge-stroke-width: 1.5;
+  --xy-connectionline-stroke: var(--primary);
+  --xy-handle-background-color: var(--primary);
+  --xy-handle-border-color: var(--card);
+  --xy-minimap-background-color: var(--card);
+  --xy-minimap-node-background-color: var(--border);
+  --xy-controls-button-background-color: var(--card);
+  --xy-controls-button-background-color-hover: var(--muted);
+  --xy-controls-button-color: var(--foreground);
+  --xy-controls-button-color-hover: var(--foreground);
+  --xy-controls-button-border-color: var(--border);
+  --xy-attribution-background-color: transparent;
+}
+
+/* Skeleton đứng yên khi người dùng chọn giảm chuyển động. */
+@media (prefers-reduced-motion: reduce) {
+  [data-slot='skeleton'] {
+    animation: none;
+  }
+}
